@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Números, Hector Axel Alejandro Pacheco Martinez</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Conversor de Números, Hector Axel Alejandro Pacheco Martinez</h1>
+
+    <div class="buttons">
+        <button onclick="showInput('decimalToBinary')">Convertir de Decimal a Binario</button>
+        <button onclick="showInput('decimalToHex')">Convertir de Decimal a Hexadecimal</button>
+        <button onclick="showInput('binaryToDecimal')">Convertir de Binario a Decimal</button>
+        <button onclick="showInput('binaryToHex')">Convertir de Binario a Hexadecimal</button>
+        <button onclick="showInput('hexToDecimal')">Convertir de Hexadecimal a Decimal</button>
+        <button onclick="showInput('hexToBinary')">Convertir de Hexadecimal a Binario</button>
+    </div>
+
+    <div class="input-section">
+        <input type="text" id="numberInput" placeholder="Ingresa el número" />
+        <button onclick="convert()">Convertir</button>
+        <p id="result"></p>
+    </div>
+
+    <button id="backButton" onclick="goBack()">Regresar</button>
+
+    <script>
+        let currentConversion = '';
+
+        function showInput(conversionType) {
+            currentConversion = conversionType;
+            document.querySelector('.buttons').style.display = 'none';
+            document.querySelector('.input-section').style.display = 'block';
+        }
+
+        function convert() {
+            const input = document.getElementById('numberInput').value;
+            let result = '';
+
+            switch (currentConversion) {
+                case 'decimalToBinary':
+                    result = parseInt(input).toString(2);
+                    break;
+                case 'decimalToHex':
+                    result = parseInt(input).toString(16).toUpperCase();
+                    break;
+                case 'binaryToDecimal':
+                    result = parseInt(input, 2).toString(10);
+                    break;
+                case 'binaryToHex':
+                    result = parseInt(input, 2).toString(16).toUpperCase();
+                    break;
+                case 'hexToDecimal':
+                    result = parseInt(input, 16).toString(10);
+                    break;
+                case 'hexToBinary':
+                    result = parseInt(input, 16).toString(2);
+                    break;
+                default:
+                    result = 'Conversión no válida';
+            }
+
+            document.getElementById('result').textContent = `Resultado: ${result}`;
+            document.getElementById('backButton').style.display = 'block'; // Mostrar botón de regresar
+        }
+
+        function goBack() {
+            document.querySelector('.buttons').style.display = 'grid'; // Mostrar botones de conversión
+            document.querySelector('.input-section').style.display = 'none'; // Ocultar la sección de input
+            document.getElementById('backButton').style.display = 'none'; // Ocultar botón de regresar
+            document.getElementById('numberInput').value = ''; // Limpiar campo de entrada
+            document.getElementById('result').textContent = ''; // Limpiar resultado
+        }
+    </script>
+
+</body>
+</html>
